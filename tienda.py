@@ -14,7 +14,7 @@ def main():
         </style>
     """, unsafe_allow_html=True)
 
-    st.title("🏍️ Envío de Comprobante")
+    st.title("🏍️ Envíos Benito")
     st.write("Verifica los datos de tu pedido abajo:")
 
     # --- CAMPOS DE DATOS ---
@@ -67,3 +67,4 @@ ADJUNTO COMPROBANTE DE PAGO 👇"""
 
 if __name__ == "__main__":
     main()
+
