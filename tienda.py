@@ -67,13 +67,14 @@ if st.button("🔄 PRIMERO DALE CLIC AQUÍ PARA CONFIRMAR DATOS"):
     
     if cliente_nombre and concepto:
         # Preparamos el mensaje
-        texto_ws = (f"Hola *{NOMBRE_NEGOCIO}*! {EMOJI_LOGO}\n\n"
-                    f"Soy *{cliente_nombre}*.\n"
-                    f"💰 Pago de: *${monto}*.\n"
-                    f"🛍️ *Pedido:* {concepto}\n"
-                    f"📍 *Dirección/Notas:* {cliente_notas}")
-                   
-                    ADJUNTO COMPROBANTE DE PAGO 👇"""
+        mensaje = f"""Hola TU TIENDA VIP! 🏍️
+
+Soy *{nombre_cliente}*.
+💰 Pago de: ${monto}.
+🛍️ Pedido: {pedido}
+📍 Dirección/Notas: {direccion}
+
+ADJUNTO COMPROBANTE DE PAGO 👇"""
         
         link = f"https://api.whatsapp.com/send?phone={WHATSAPP_PEDIDOS}&text={quote(texto_ws)}"
         
@@ -86,4 +87,5 @@ if st.button("🔄 PRIMERO DALE CLIC AQUÍ PARA CONFIRMAR DATOS"):
         st.error("⚠️ Falta tu Nombre o el Pedido.")
 else:
     st.caption("👆 Presiona el botón gris para generar tu enlace de WhatsApp.")
+
 
