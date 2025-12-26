@@ -19,7 +19,7 @@ def main():
         </style>
     """, unsafe_allow_html=True)
 
-    st.title("💰 Información de Pago")
+    st.title("🛵 Envios Benito")
     
     # --- SECCIÓN FIJA DE DATOS BANCARIOS ---
     st.markdown("""
@@ -80,3 +80,4 @@ ADJUNTO COMPROBANTE DE PAGO 👇"""
 
 if __name__ == "__main__":
     main()
+
