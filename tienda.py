@@ -7,7 +7,7 @@ from urllib.parse import quote
 NOMBRE_NEGOCIO = "ENVIOS BENITO"
 EMOJI_LOGO = "💎"
 COLOR_BOTON = "#2E86C1"          # Color elegante (Azul)
-WHATSAPP_PEDIDOS = "0962362257" # TU NÚMERO AQUÍ (Sin el +)
+WHATSAPP_PEDIDOS = "593962362257" # TU NÚMERO AQUÍ (Sin el +)
 
 # DATOS BANCARIOS
 BANCO_NOMBRE = "Banco Pichincha"
@@ -112,4 +112,5 @@ if cliente_nombre and concepto:
     st.markdown(f"### [👉 CLIC AQUÍ PARA ABRIR WHATSAPP (Enlace Directo)]({link_final})")
     
 else:
+
     st.warning("✍️ Por favor completa tu Nombre y qué estás pagando para activar el botón.")
