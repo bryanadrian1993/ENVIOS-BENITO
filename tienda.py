@@ -42,7 +42,7 @@ def main():
     direccion = st.text_input("Dirección de entrega / Referencia:", "")
     
     # TU NÚMERO DE WHATSAPP
-    mi_numero = "593999999999" 
+    mi_numero = "593962362257" 
 
     st.divider()
 
@@ -80,4 +80,5 @@ ADJUNTO COMPROBANTE DE PAGO 👇"""
 
 if __name__ == "__main__":
     main()
+
 
