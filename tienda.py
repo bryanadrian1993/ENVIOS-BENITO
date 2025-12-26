@@ -42,7 +42,7 @@ def main():
     direccion_cliente = st.text_input("Dirección de entrega / Referencia:", "")
     
     # TU NÚMERO DE WHATSAPP (Cámbiado por el tuyo)
-    mi_numero = "593999999999" 
+    mi_numero = "593962362257" 
 
     st.divider()
 
@@ -50,7 +50,7 @@ def main():
     if nombre and monto and pedido and direccion_cliente:
         
         # Construcción del mensaje con la variable direccion_cliente
-        mensaje_final = f"""Hola TU TIENDA VIP! 🏍️
+        mensaje_final = f"""Hola BENITO! 🏍️
 
 Soy *{nombre}*.
 💰 Pago de: ${monto}.
@@ -85,3 +85,4 @@ ADJUNTO COMPROBANTE DE PAGO 👇"""
 
 if __name__ == "__main__":
     main()
+
