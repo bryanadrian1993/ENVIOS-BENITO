@@ -2,7 +2,7 @@ import streamlit as st
 import urllib.parse
 
 # Configuración de la página
-st.set_page_config(page_title="PAGO VIP", page_icon="💰")
+st.set_page_config(page_title="PAGO VIP", page_icon="🛵")
 
 def main():
     # Estilo personalizado
@@ -85,4 +85,5 @@ ADJUNTO COMPROBANTE DE PAGO 👇"""
 
 if __name__ == "__main__":
     main()
+
 
