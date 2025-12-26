@@ -2,27 +2,24 @@ import streamlit as st
 from urllib.parse import quote
 
 # ==============================================================================
-# 🛠️ CONFIGURACIÓN (Edita esto con los datos de tu cliente)
+# 🛠️ CONFIGURACIÓN
 # ==============================================================================
-NOMBRE_NEGOCIO = "ENVIOS BENITO"
-EMOJI_LOGO = "💎"
-COLOR_BOTON = "#2E86C1"          # Color elegante (Azul)
-WHATSAPP_PEDIDOS = "593962362257" # TU NÚMERO AQUÍ (Sin el +)
+NOMBRE_NEGOCIO = "TU TIENDA VIP"
+EMOJI_LOGO = "🏍️"  # <-- Esta moto suele verse ROJA en la mayoría de celulares
+COLOR_BOTON = "#D32F2F" # <-- Cambié el botón a un ROJO INTENSO para que combine
+WHATSAPP_PEDIDOS = "593962362257"  # Tu número corregido
 
 # DATOS BANCARIOS
 BANCO_NOMBRE = "Banco Pichincha"
-TIPO_CUENTA = "Ahorros"
-NUMERO_CUENTA = "2205444877"
-TITULAR_CUENTA = "GILER GILER PAUL ANDRES"
-CEDULA_CUENTA = "17XXXXXXX"
-USUARIO_PAYPAL = "tuusuario"
+NUMERO_CUENTA = "220XXXXXXX"
+TITULAR = "Tu Nombre"
 
 # ==============================================================================
-# 🚀 MOTOR DE LA APP
+# 🚀 APP
 # ==============================================================================
 st.set_page_config(page_title=f"Pagos - {NOMBRE_NEGOCIO}", page_icon=EMOJI_LOGO, layout="centered")
 
-# Estilos CSS para que se vea costoso
+# Estilos
 st.markdown(f"""
     <style>
     .stLinkButton>a {{
@@ -36,81 +33,54 @@ st.markdown(f"""
         justify-content: center;
         align-items: center;
         font-weight: bold;
-        border: none;
-        box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
         text-decoration: none;
-    }}
-    .stLinkButton>a:hover {{
-        background-color: {COLOR_BOTON};
-        filter: brightness(85%);
     }}
     </style>
     """, unsafe_allow_html=True)
 
-# Encabezado
-st.markdown(f"<h1 style='text-align: center;'>{EMOJI_LOGO} {NOMBRE_NEGOCIO}</h1>", unsafe_allow_html=True)
-st.info("🔒 Terminal de Pagos Segura.")
+st.title(f"{EMOJI_LOGO} {NOMBRE_NEGOCIO}")
+st.info("🔒 Sistema de Pedidos.")
 
-# --- SECCIÓN 1: DETALLES ---
-st.write("### 1. Detalles del Pedido")
+# 1. DETALLES
+st.write("### 1. Detalles")
 col1, col2 = st.columns([2, 1])
 with col1:
-    concepto = st.text_input("¿Qué estás pagando?", placeholder="Ej: Zapatos Nike / Asesoría")
+    concepto = st.text_input("¿Qué pides?", placeholder="Ej: Zapatos")
 with col2:
-    monto = st.number_input("Monto Total ($):", min_value=1.00, value=10.00, step=0.50)
+    monto = st.number_input("Valor ($):", min_value=1.00, value=10.00)
 
-# --- SECCIÓN 2: CLIENTE ---
+# 2. DATOS DEL CLIENTE
 st.write("### 2. Tus Datos")
-cliente_nombre = st.text_input("Tu Nombre Completo:")
-cliente_notas = st.text_area("Dirección de Envío / Notas Adicionales:", placeholder="Ej: Calle Principal 123 y Secundaria. Casa verde.")
+cliente_nombre = st.text_input("Tu Nombre:")
+cliente_notas = st.text_area("Dirección / Notas:", placeholder="Escribe aquí...")
 
-# --- SECCIÓN 3: PAGO ---
-st.write("### 3. Forma de Pago")
-tab_banco, tab_paypal = st.tabs(["🏛️ Transferencia", "💳 PayPal / Tarjeta"])
-
-with tab_banco:
-    st.success("Cuentas Oficiales:")
-    st.markdown(f"""
-    **Banco:** {BANCO_NOMBRE}  
-    **Cuenta:** {NUMERO_CUENTA} ({TIPO_CUENTA})  
-    **Titular:** {TITULAR_CUENTA} | **C.I.:** {CEDULA_CUENTA}
-    """)
-    st.caption("⚠️ Sube tu comprobante al chat de WhatsApp al finalizar.")
-
-with tab_paypal:
-    if USUARIO_PAYPAL:
-        link_pp = f"https://paypal.me/{USUARIO_PAYPAL}/{monto}"
-        st.info("Paga seguro con PayPal.")
-        st.link_button(f"👉 Pagar ${monto} ahora", link_pp)
-    else:
-        st.warning("Pago con tarjeta no habilitado.")
+# 3. PAGO
+st.write("### 3. Pago")
+st.success(f"🏦 {BANCO_NOMBRE} | 🔢 {NUMERO_CUENTA}\n👤 {TITULAR}")
 
 st.markdown("---")
 
-# --- SECCIÓN 4: FINALIZAR (AQUÍ ESTÁ LA MAGIA QUE SÍ FUNCIONA) ---
-st.write("### 4. Confirmar y Enviar")
+# 4. CONFIRMACIÓN
+st.write("### 4. Enviar")
 
-# 1. Preparamos el mensaje con TODOS los datos del diseño anterior
-texto_ws = (f"Hola *{NOMBRE_NEGOCIO}*! {EMOJI_LOGO}\n\n"
-            f"Soy *{cliente_nombre}*.\n"
-            f"Acabo de realizar el pago de: *${monto}*.\n"
-            f"🛍️ *Concepto:* {concepto}\n"
-            f"📍 *Datos/Dirección:* {cliente_notas}\n\n"
-            f"Adjunto mi comprobante a continuación 👇")
-
-# 2. Creamos el link (Usando la lógica que te funcionó)
-link_final = f"https://api.whatsapp.com/send?phone={WHATSAPP_PEDIDOS}&text={quote(texto_ws)}"
-
-if cliente_nombre and concepto:
-    # MOSTRAMOS LAS DOS OPCIONES (La visual y la infalible)
+if st.button("🔄 PRIMERO DALE CLIC AQUÍ PARA CONFIRMAR DATOS"):
     
-    # Opción A: El Botón Grande y Bonito
-    st.link_button("✅ ENVIAR PEDIDO A WHATSAPP (Botón)", link_final)
-    
-    # Opción B: El Enlace de Respaldo (Por si el botón falla en PC)
-    st.caption("¿El botón no abre? Usa el enlace directo de abajo:")
-    st.markdown(f"### [👉 CLIC AQUÍ PARA ABRIR WHATSAPP (Enlace Directo)]({link_final})")
-    
+    if cliente_nombre and concepto:
+        # Preparamos el mensaje
+        texto_ws = (f"Hola *{NOMBRE_NEGOCIO}*! {EMOJI_LOGO}\n\n"
+                    f"Soy *{cliente_nombre}*.\n"
+                    f"💰 Pago de: *${monto}*.\n"
+                    f"🛍️ *Pedido:* {concepto}\n"
+                    f"📍 *Dirección/Notas:* {cliente_notas}")
+        
+        link = f"https://api.whatsapp.com/send?phone={WHATSAPP_PEDIDOS}&text={quote(texto_ws)}"
+        
+        st.success("✅ ¡Datos guardados! Ahora sí envía el pedido:")
+        
+        # EL BOTÓN FINAL
+        st.link_button("🚀 ENVIAR AHORA POR WHATSAPP", link)
+        
+    else:
+        st.error("⚠️ Falta tu Nombre o el Pedido.")
 else:
-
-    st.warning("✍️ Por favor completa tu Nombre y qué estás pagando para activar el botón.")
+    st.caption("👆 Presiona el botón gris para generar tu enlace de WhatsApp.")
