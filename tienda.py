@@ -48,6 +48,10 @@ def main():
     nombre = st.text_input("Tu Nombre y Apellido:", key="nom")
     monto = st.text_input("Monto Transferido ($):", key="mon")
     pedido = st.text_input("Producto o Pedido:", key="ped")
+    
+    # NUEVA CASILLA: Dirección de recogida
+    recogida = st.text_input("Dirección de recogida / Referencia:", key="rec")
+    
     direccion_cliente = st.text_input("Dirección de entrega / Referencia:", key="dir")
     
     # TU NÚMERO DE WHATSAPP
@@ -56,10 +60,19 @@ def main():
     st.divider()
 
     # --- VALIDACIÓN Y BOTÓN ---
-    if nombre and monto and pedido and direccion_cliente:
+    # Ahora validamos que los 5 campos estén llenos
+    if nombre and monto and pedido and recogida and direccion_cliente:
         
-        # El mensaje se construye sin espacios extra al inicio de las líneas
-        mensaje_final = f"Hola BENITO! 🏍️\n\nSoy *{nombre}*.\n💰 Pago de: ${monto}.\n🛍️ Pedido: {pedido}\n📍 Dirección/Notas: {direccion_cliente}\n\nADJUNTO COMPROBANTE DE PAGO 👇"
+        # El mensaje incluye ahora la dirección de recogida y entrega
+        mensaje_final = (
+            f"Hola BENITO! 🏍️\n\n"
+            f"Soy *{nombre}*.\n"
+            f"💰 Pago de: ${monto}.\n"
+            f"🛍️ Pedido: {pedido}\n"
+            f"📤 Recogida: {recogida}\n"
+            f"📍 Entrega: {direccion_cliente}\n\n"
+            f"ADJUNTO COMPROBANTE DE PAGO 👇"
+        )
 
         # Codificación segura
         mensaje_url = urllib.parse.quote(mensaje_final)
@@ -83,8 +96,7 @@ def main():
             </a>
         ''', unsafe_allow_html=True)
     else:
-        st.warning("⚠️ Completa los 4 campos de arriba para activar el botón de envío.")
+        st.warning("⚠️ Completa los 5 campos de arriba para activar el botón de envío.")
 
 if __name__ == "__main__":
     main()
-
