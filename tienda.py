@@ -28,7 +28,7 @@ def main():
         </style>
     """, unsafe_allow_html=True)
 
-    st.title("🛵 Envios Benito")
+    st.title("🛵 ENVIOS BENITO - ATENCION DE 5:30 PM A 10 PM ")
     
     # --- SECCIÓN FIJA DE DATOS BANCARIOS ---
     st.markdown("""
@@ -38,7 +38,7 @@ def main():
         <p><b>Tipo:</b> Ahorros</p>
         <p><b>Cuenta:</b> 2205444877</p>
         <p><b>Beneficiario:</b> GILER GILER PAUL ANDRES</p>
-        <p><b>Cédula:</b> 00000000</p>
+        <p><b>Cédula:</b> 0804201291</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -87,3 +87,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
