@@ -49,8 +49,8 @@ def main():
     monto = st.text_input("Monto Transferido ($):", key="mon")
     pedido = st.text_input("Producto o Pedido:", key="ped")
     
-    # NUEVA CASILLA: Dirección de recogida
-    recogida = st.text_input("Dirección de recogida / Referencia:", key="rec")
+    # CASILLA CON ETIQUETA (OPCIONAL)
+    recogida = st.text_input("Dirección de recogida / Referencia (OPCIONAL):", key="rec")
     
     direccion_cliente = st.text_input("Dirección de entrega / Referencia:", key="dir")
     
@@ -60,16 +60,18 @@ def main():
     st.divider()
 
     # --- VALIDACIÓN Y BOTÓN ---
-    # Ahora validamos que los 5 campos estén llenos
-    if nombre and monto and pedido and recogida and direccion_cliente:
+    # Nota: 'recogida' no es necesaria en la validación del 'if'
+    if nombre and monto and pedido and direccion_cliente:
         
-        # El mensaje incluye ahora la dirección de recogida y entrega
+        # El mensaje solo incluirá la recogida si el usuario escribió algo
+        texto_recogida = f"📤 Recogida: {recogida}\n" if recogida else ""
+
         mensaje_final = (
             f"Hola BENITO! 🏍️\n\n"
             f"Soy *{nombre}*.\n"
             f"💰 Pago de: ${monto}.\n"
             f"🛍️ Pedido: {pedido}\n"
-            f"📤 Recogida: {recogida}\n"
+            f"{texto_recogida}"
             f"📍 Entrega: {direccion_cliente}\n\n"
             f"ADJUNTO COMPROBANTE DE PAGO 👇"
         )
@@ -78,7 +80,7 @@ def main():
         mensaje_url = urllib.parse.quote(mensaje_final)
         link_whatsapp = f"https://wa.me/{mi_numero}?text={mensaje_url}"
 
-        # Botón HTML con diseño móvil
+        # Botón HTML
         st.markdown(f'''
             <a href="{link_whatsapp}" target="_blank" style="text-decoration: none;">
                 <div style="
@@ -96,7 +98,7 @@ def main():
             </a>
         ''', unsafe_allow_html=True)
     else:
-        st.warning("⚠️ Completa los 5 campos de arriba para activar el botón de envío.")
+        st.warning("⚠️ Completa los campos obligatorios para activar el botón de envío.")
 
 if __name__ == "__main__":
     main()
